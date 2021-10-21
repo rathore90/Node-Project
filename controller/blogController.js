@@ -53,31 +53,29 @@ const blog_delete = (req, res) => {
 }
 
 const blog_payment = (req, res) => {
-  // Moreover you can take more details from user 
-  // like Address, Name, etc from form 
   stripe.customers.create({
     email: req.body.stripeEmail,
     source: req.body.stripeToken,
-    name: 'Gautam Sharma',
+    name: 'Pardeep Rathore',
     address: {
-      line1: 'TC 9/4 Old MES colony',
+      line1: '801 Fennel Road',
       postal_code: '110092',
-      city: 'New Delhi',
-      state: 'Delhi',
-      country: 'India',
+      city: 'Kelowna',
+      state: 'BC',
+      country: 'Canada',
     }
   })
     .then((customer) => {
 
       return stripe.charges.create({
         amount: 7000,    // Charing Rs 25 
-        description: 'Web Development Product',
-        currency: 'USD',
+        description: 'Blog Development',
+        currency: 'CAD',
         customer: customer.id
       });
     })
     .then((charge) => {
-      res.render('payment_success', { title: 'Create a new blog' }); // If no error occurs
+      res.render('payment_success', { title: 'Payment Success' }); // If no error occurs
     })
     .catch((err) => {
       res.send(err)    // If some error occurs 
