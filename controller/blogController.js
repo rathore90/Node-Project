@@ -1,4 +1,5 @@
 const Blog = require('../models/blog');
+const axios = require('axios')
 const PUBLISHER_KEY = 'pk_test_51HAQ8GHDkmXqGeZTqGsVbqI9Q3ulKvWNqiiLkceJO5cXHyulHyyk5A2VWbDX4dJDptC7248jaFrGGuXpz1Jr7W5P007aUoMX4O'
 const SECRET_KEY = 'sk_test_51HAQ8GHDkmXqGeZTdMZBc1PnsjiYXNiGIcu4QT6PDa9kA2Fjhk6uTv8OlX4uhMs5vliZcdIOsV6YKfMGiNLEkSNl00vkJYFUnZ'
 
@@ -32,8 +33,27 @@ const blog_details = (req, res) => {
     });
 }
 
-const blog_create_get = (req, res) => {
-  res.render('create', { title: 'Create a new blog' });
+const blog_create_get = async (req, res) => {
+  let data = {}
+
+  const {token_type, access_token} = req.oidc.access_Token;
+  try{
+    const apiResponse = await axios.get('http://localhost:8000/private',
+    {
+      header: {
+        authorization: `${token_type} ${access_token}`
+      }
+    });
+    data = apiResponse.data;
+  }catch(e){
+    console.log(e);
+  }
+  res.render('create', {
+    title: 'Create a new blog', 
+    isAuthenticated: req.oidc.isAuthenticated(),
+    user: req.oidc.user,
+    data: data
+  });
 }
 
 const blog_create_post = (req, res) => {

@@ -2,11 +2,7 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <% if(!isAuthenticated) { %>
-    <%- include("./partials/login.ejs") %>
-  <% } else { %>
     <%- include("./partials/logout.ejs") %>
-  <% } %>
 
   <div class="create-blog content">
     <form action="/blogs" method="post">
@@ -19,7 +15,7 @@
       <button>Submit</button>
     </form>
   </div>
-
+  <pre><%= JSON.stringify(data, null, 2) %></pre>
   <%- include("./partials/footer.ejs") %>
 </body>
 </html>

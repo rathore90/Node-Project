@@ -13,6 +13,12 @@ const config = {
   baseURL: process.env.BASEURL ,
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUER,
+  clientSecret: process.env.CLIENTSECRET,
+  authorizationParams: {
+    response_type: 'code',
+    audience: 'http://localhost:8000',
+    scope: 'openid profile email'
+  }
 };
 
 // express app
@@ -42,7 +48,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { title: 'About' });
+  res.render('about', {
+    title: 'About', 
+    isAuthenticated: req.oidc.isAuthenticated(),
+    user: req.oidc.user 
+  });
 });
 
 // app.get('/', (req, res) => {
