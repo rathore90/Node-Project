@@ -3,6 +3,17 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { render } = require('ejs');
 const blogRouters = require('./routes/blogRoutes')
+const { auth } = require('express-openid-connect');
+require('dotenv').config();
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL ,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUER,
+};
 
 // express app
 const app = express();
@@ -21,6 +32,10 @@ app.use(express.static('public'));
 // this middleware is used for accepting form data
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// auth
 
 app.get('/', (req, res) => {
   res.redirect('/blogs');
@@ -29,6 +44,11 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
+
+// app.get('/', (req, res) => {
+//   // res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+//   res.send('partials/nav', { isAuthenticated: req.oidc.isAuthenticated() })
+// });
 
 //  blog routes
 app.use('/blogs', blogRouters);

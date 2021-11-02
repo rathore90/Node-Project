@@ -2,7 +2,22 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+  <% if(!isAuthenticated) { %>
+    <%- include("./partials/login.ejs") %>
+  <% } else { %>
+    <%- include("./partials/logout.ejs") %>
+  <% } %>
+
+
+  <% if(user) { %>
+  <div>Welcome</div>
+  <div class="profile-info">
+  <img src="<%= user.picture %>" alt="userimage">
+  <p class="name">
+    <%= user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1) %>
+  </p>
+  </div>
+  <% } %>
 
   <div class="blogs content">
     <h2>All Blogs</h2>

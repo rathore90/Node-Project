@@ -2,7 +2,11 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+  <% if(!isAuthenticated) { %>
+    <%- include("./partials/login.ejs") %>
+  <% } else { %>
+    <%- include("./partials/logout.ejs") %>
+  <% } %>
 
   <div class="not-found content">
     <h1>404..........OOPS, page not found :)</h1>

@@ -1,13 +1,19 @@
 const Blog = require('../models/blog');
-const PUBLISHER_KEY = "pk_test_51GtSONETdjG0caU1urBtCRuAeA2KsB92MjUzkLQR8LhopftaXkW6EDW9N2Ax8Q9gMuldvYgRj4FPfPgIC1EGuUtm00D5sjnRNu"
-const SECRET_KEY = "sk_test_51GtSONETdjG0caU1tLawSk3OAdAKzFHNlDZy0HEMUP4pluP8rFlyEM53LLCa2OyM1XioPKGf8klJcWIvtxwoHMih00HlWR2oUx"
+const PUBLISHER_KEY = 'pk_test_51HAQ8GHDkmXqGeZTqGsVbqI9Q3ulKvWNqiiLkceJO5cXHyulHyyk5A2VWbDX4dJDptC7248jaFrGGuXpz1Jr7W5P007aUoMX4O'
+const SECRET_KEY = 'sk_test_51HAQ8GHDkmXqGeZTdMZBc1PnsjiYXNiGIcu4QT6PDa9kA2Fjhk6uTv8OlX4uhMs5vliZcdIOsV6YKfMGiNLEkSNl00vkJYFUnZ'
 
 const stripe = require('stripe')(SECRET_KEY)
 
 const blog_index = (req, res) => {
   Blog.find().sort({ createdAt: -1 })
     .then(result => {
-      res.render('index', { blogs: result, title: 'All blogs', key: PUBLISHER_KEY });
+      res.render('index', { 
+        blogs: result, 
+        title: 'All blogs', 
+        key: PUBLISHER_KEY,   
+        isAuthenticated: req.oidc.isAuthenticated(),
+        user: req.oidc.user
+      });
     })
     .catch(err => {
       console.log(err);
@@ -68,7 +74,7 @@ const blog_payment = (req, res) => {
     .then((customer) => {
 
       return stripe.charges.create({
-        amount: 7000,    // Charing Rs 25 
+        amount: 7000,  
         description: 'Blog Development',
         currency: 'CAD',
         customer: customer.id

@@ -1,12 +1,8 @@
 <html lang="en">
-<%- include("./partials/head.ejs") %>
+<%- include("../partials/head.ejs") %>
 
 <body>
-  <% if(!isAuthenticated) { %>
-    <%- include("./partials/login.ejs") %>
-  <% } else { %>
-    <%- include("./partials/logout.ejs") %>
-  <% } %>
+  <%- include("../partials/nav.ejs") %>
 
   <div class="create-blog content">
     <form action="/blogs" method="post">
@@ -20,6 +16,6 @@
     </form>
   </div>
 
-  <%- include("./partials/footer.ejs") %>
+  <%- include("../partials/footer.ejs") %>
 </body>
 </html>
