@@ -8,6 +8,12 @@ require('dotenv').config();
 const config = {
   authRequired: false,
   auth0Logout: true,
+  session: {
+    //@ts-ignore
+    cookie: {
+      domain: '.ecommerce-cms-portal.herokuapp.com'
+    }
+  },
   secret: process.env.SECRET,
   baseURL: process.env.BASEURL ,
   clientID: process.env.CLIENTID,
