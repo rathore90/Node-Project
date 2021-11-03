@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const { render } = require('ejs');
 const blogRouters = require('./routes/blogRoutes')
 const { auth } = require('express-openid-connect');
 require('dotenv').config();

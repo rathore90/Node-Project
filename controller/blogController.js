@@ -36,11 +36,13 @@ const blog_details = (req, res) => {
 const blog_create_get = async (req, res) => {
   let data = {}
 
-  const {token_type, access_token} = req.oidc.access_Token;
+  console.log("tokennning ", req.oidc.accessToken);
+
+  const {token_type, access_token} = req.oidc.accessToken;
   try{
     const apiResponse = await axios.get('http://localhost:8000/private',
     {
-      header: {
+      headers: {
         authorization: `${token_type} ${access_token}`
       }
     });
