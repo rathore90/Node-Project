@@ -11,7 +11,7 @@ const config = {
   session: {
     //@ts-ignore
     cookie: {
-      domain: '.ecommerce-cms-portal.herokuapp.com'
+      domain: 'https://ecommerce-cms-portal.herokuapp.com'
     }
   },
   secret: process.env.SECRET,
@@ -28,6 +28,7 @@ const config = {
 
 // express app
 const app = express();
+// app.set('trust proxy', true)
 
 // connection string
 const dbURI = 'mongodb+srv://pardeep_node:44yxbBysXCgZ3bSn@cluster0.n66oq.mongodb.net/node-tuts?retryWrites=true&w=majority'
