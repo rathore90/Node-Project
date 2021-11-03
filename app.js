@@ -28,7 +28,7 @@ const config = {
 
 // express app
 const app = express();
-// app.set('trust proxy', true)
+app.set('trust proxy', true)
 
 // connection string
 const dbURI = 'mongodb+srv://pardeep_node:44yxbBysXCgZ3bSn@cluster0.n66oq.mongodb.net/node-tuts?retryWrites=true&w=majority'
