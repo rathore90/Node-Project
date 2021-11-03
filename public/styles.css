@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
     body{
-      max-width: 1200px;
       margin: 20px auto;
       padding: 0 20px;
       font-family: 'Noto Serif', serif;
-      max-width: 1200px;
     }
     p, h1, h2, h3, a, ul{
       margin: 0;
@@ -59,7 +57,10 @@
       display: block;
       margin: 40px 0;
       padding-left: 30px;
+      margin-right: 5%;
       border-left: 6px solid crimson;
+      width: 25%;
+      float: left;
     }
     .blogs a:hover h3{
       color: crimson;
@@ -109,3 +110,12 @@
       font-size: 1.2em;
       cursor: pointer;
     }
+
+    /* media Queries */
+
+    @media (max-width: 600px) {
+      .blogs a{
+        float: inherit;
+      }
+    }
+

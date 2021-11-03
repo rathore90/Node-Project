@@ -25,7 +25,11 @@ const blog_details = (req, res) => {
   const id = req.params.id;
   Blog.findById(id)
     .then(result => {
-      res.render('details', { blog: result, title: 'Blog Details' });
+      res.render('details', {
+        blog: result, 
+        title: 'Blog Details', 
+        isAuthenticated: req.oidc.isAuthenticated(),
+        user: req.oidc.user, });
     })
     .catch(err => {
       console.log(err);

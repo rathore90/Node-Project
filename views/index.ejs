@@ -20,25 +20,27 @@
   <% } %>
 
   <div class="blogs content">
-    <h2>All Blogs</h2>
+    <h2>All Products</h2>
 
-    <% if (blogs.length > 0) { %>
-      <% blogs.forEach(blog => { %>
-      <a class="single" href="/blogs/<%= blog._id %>">
-            <h3 class="title"><%= blog.title %></h3>
-            <p class="snippet"><%= blog.snippet %></p>
-            <form action="/blogs/payment" method="POST">
-              <script src="//checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="<%= key %>"
-                data-amount="7000" data-currency="usd" data-name="Pardeep Rathore"
-                data-description="Buy Demo Blog" data-locale="auto">
-              </script>
-            </form>
-      </a>
-      <% }) %>
-    <% } else { %>
-      <p>There are no blogs to display...</p>
-    <% } %>
-    
+    <div class="blog-container">
+        <% if (blogs.length > 0) { %>
+        <% blogs.forEach(blog => { %>
+        <a class="single" href="/blogs/<%= blog._id %>">
+          <h3 class="title"><%= blog.title %></h3>
+          <p class="snippet"><%= blog.snippet %></p>
+          <form action="/blogs/payment" method="POST">
+            <script src="//checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="<%= key %>"
+              data-amount="7000" data-currency="usd" data-name="Pardeep Rathore" data-description="Buy Demo Blog"
+              data-locale="auto">
+            </script>
+          </form>
+        </a>
+        <% }) %>
+        <% } else { %>
+        <p>There are no blogs to display...</p>
+        <% } %>
+    </div>
+
   </div>
 
   <%- include("./partials/footer.ejs") %>
