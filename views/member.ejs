@@ -1,0 +1,24 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <% if(!isAuthenticated) { %>
+    <%- include("./partials/login.ejs") %>
+  <% } else { %>
+    <%- include("./partials/logout.ejs") %>
+  <% } %>
+
+
+  <% if(user) { %>
+  <div>Welcome Member Page</div>
+  <div class="profile-info">
+  <img src="<%= user.picture %>" alt="userimage">
+  <p class="name">
+    <%= user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1) %>
+  </p>
+  </div>
+  <% } %>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

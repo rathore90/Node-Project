@@ -4,7 +4,8 @@ const { requiresAuth } = require('express-openid-connect');
 
 const router = express.Router();
 
-router.get('/create', requiresAuth() ,blogController.blog_create_get);
+router.get('/member', requiresAuth(), blogController.blog_memeber_page);
+router.get('/create', requiresAuth(), blogController.role_based_authentication);
 router.get('/', blogController.blog_index);
 router.post('/', blogController.blog_create_post);
 router.get('/:id', blogController.blog_details);

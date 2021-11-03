@@ -35,10 +35,10 @@ const blog_details = (req, res) => {
 
 const blog_create_get = async (req, res) => {
   let data = {}
-  
+
   const {token_type, access_token} = req.oidc.accessToken;
   try{
-    const apiResponse = await axios.get('http://localhost:8000/private',
+    const apiResponse = await axios.get('http://localhost:8000/role',
     {
       headers: {
         authorization: `${token_type} ${access_token}`
@@ -108,11 +108,62 @@ const blog_payment = (req, res) => {
     });
 }
 
+const role_based_authentication = async (req, res) => {
+  var data = {}
+  const { token_type, access_token } = req.oidc.accessToken;
+  try {
+    const apiResponse = await axios.get('http://localhost:8000/role',
+      {
+        headers: {
+          authorization: `${token_type} ${access_token}`
+        }
+      });
+    data = apiResponse.data;
+    
+    res.render('create', {
+      title: 'Create a new blog',
+      isAuthenticated: req.oidc.isAuthenticated(),
+      user: req.oidc.user,
+      data: data
+    });
+  } catch (e) {
+    console.log(e);
+    res.render('404', {
+      title: '404 Page',
+    });
+  }
+}
+
+const blog_memeber_page = async (req, res) => {
+  let data = {}
+
+  const { token_type, access_token } = req.oidc.accessToken;
+  try {
+    const apiResponse = await axios.get('http://localhost:8000/private',
+      {
+        headers: {
+          authorization: `${token_type} ${access_token}`
+        }
+      });
+    data = apiResponse.data;
+  } catch (e) {
+    console.log(e);
+  }
+  res.render('member', {
+    title: 'Member Page',
+    isAuthenticated: req.oidc.isAuthenticated(),
+    user: req.oidc.user,
+    data: data
+  });
+};
+
 module.exports = {
   blog_index,
   blog_details,
   blog_create_get,
   blog_create_post,
   blog_delete,
-  blog_payment
+  blog_payment,
+  role_based_authentication,
+  blog_memeber_page
 }
