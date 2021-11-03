@@ -8,12 +8,6 @@ require('dotenv').config();
 const config = {
   authRequired: false,
   auth0Logout: true,
-  session: {
-    //@ts-ignore
-    cookie: {
-      domain: 'https://ecommerce-cms-portal.herokuapp.com'
-    }
-  },
   secret: process.env.SECRET,
   baseURL: process.env.BASEURL ,
   clientID: process.env.CLIENTID,
@@ -28,7 +22,7 @@ const config = {
 
 // express app
 const app = express();
-app.set('trust proxy', true)
+// app.set('trust proxy', true)
 
 // connection string
 const dbURI = 'mongodb+srv://pardeep_node:44yxbBysXCgZ3bSn@cluster0.n66oq.mongodb.net/node-tuts?retryWrites=true&w=majority'
