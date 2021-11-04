@@ -5,7 +5,7 @@ const blogRouters = require('./routes/blogRoutes')
 const { auth } = require('express-openid-connect');
 require('dotenv').config();
 
-const host = 'http://localhost:8000',
+const host = 'http://localhost:8000';
 
 const config = {
   authRequired: false,
