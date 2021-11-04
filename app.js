@@ -5,7 +5,6 @@ const blogRouters = require('./routes/blogRoutes')
 const { auth } = require('express-openid-connect');
 require('dotenv').config();
 
-const host = 'http://localhost:8000';
 
 const config = {
   authRequired: false,
@@ -17,14 +16,13 @@ const config = {
   clientSecret: process.env.CLIENTSECRET,
   authorizationParams: {
     response_type: 'code',
-    audience: {host},
+    audience: 'http://localhost:8000',
     scope: 'openid profile email'
   }
 };
 
 // express app
 const app = express();
-// app.set('trust proxy', true)
 
 // connection string
 const dbURI = 'mongodb+srv://pardeep_node:44yxbBysXCgZ3bSn@cluster0.n66oq.mongodb.net/node-tuts?retryWrites=true&w=majority'
