@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/iamshaunjp/node-crash-course.git"
   },
-  "author": "net ninja",
+  "author": "net-ninja",
   "license": "ISC",
   "engines": {
     "node": "10.x"
