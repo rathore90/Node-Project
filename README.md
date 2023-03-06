@@ -10,7 +10,7 @@
 - Node, Express
 - MongoDB
 - Stripe Api for Payment Portal
-- Auth0 - Authenticatoin, Authorization, and Role Based Authentication and Authorization
+- Auth0 - Authentication, Authorization, and Role Based Authentication and Authorization
 
 ---------
 
